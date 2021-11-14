@@ -1,0 +1,19 @@
+{
+    "name": "ab/php.loc",
+    "description": "my first project",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Helen Kim",
+            "email": "rolexvinchester@gmail.com"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.4"
+    }
+}
