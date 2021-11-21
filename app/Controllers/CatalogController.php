@@ -29,7 +29,6 @@ class CatalogController
 
     public function saveProduct()
     {
-        //$fileUp = array_filter($_FILES['img']['name']);//3
         $total = count($_FILES['img']['name']);
         for ($i = 0; $i < $total; $i++) {
             $maxFileSize = 1048576;
