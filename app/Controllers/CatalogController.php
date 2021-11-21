@@ -35,8 +35,7 @@ class CatalogController
             $fileName = $_FILES['img']['name'][$i];
             $path = $_SERVER['DOCUMENT_ROOT'] . '/download/' . $fileName;
             $type = explode('/', $_FILES['img']['type'][$i]);
-            //print_r($fileName);
-            //print_r($type);
+            
 
 
             if ($_FILES['fileUpload']['size'][$i] > $maxFileSize) {
