@@ -1,3 +1,7 @@
+
+<?php print_r($product)?>
+<?php print_r($productsList)?>
+<h1><?=$product->name?></h1>
 <!DOCTYPE html>
 <html lang="en">
 <head>

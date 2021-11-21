@@ -2,12 +2,20 @@
 
 namespace App\Controllers;
 
+use App\Models\BaseModel;
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\User;
+
+
 class SiteController
 {
     public function index(){
-        include __DIR__.'/../../views/main.php';
+        Product::findById('1');
+        render('main.php');
     }
     public function notFound(){
-        include __DIR__.'/../../views/404f.php';
+        render('404f.php');
     }
 }
