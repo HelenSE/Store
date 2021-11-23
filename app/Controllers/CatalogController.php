@@ -29,16 +29,13 @@ class CatalogController
 
     public function saveProduct()
     {
-        //$fileUp = array_filter($_FILES['img']['name']);//3
         $total = count($_FILES['img']['name']);
+
         for ($i = 0; $i < $total; $i++) {
             $maxFileSize = 1048576;
             $fileName = $_FILES['img']['name'][$i];
             $path = $_SERVER['DOCUMENT_ROOT'] . '/download/' . $fileName;
             $type = explode('/', $_FILES['img']['type'][$i]);
-            //print_r($fileName);
-            //print_r($type);
-
 
             if ($_FILES['fileUpload']['size'][$i] > $maxFileSize) {
                 print_r('File' . $fileName . 'size is greater than allowed size<br>');
@@ -67,6 +64,7 @@ class CatalogController
 
         return $fileName;
     }
+
 }
 
 
