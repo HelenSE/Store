@@ -12,6 +12,11 @@ use App\Models\User;
 class SiteController
 {
     public function index(){
+        $product = new Product();
+        $product->name = "new prod";
+        $product->description = "1000";
+        $product->save();
+
         Product::findById('1');
         render('main.php');
     }

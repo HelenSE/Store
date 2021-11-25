@@ -4,6 +4,7 @@ namespace App\Models;
 use mysqli;
 class BaseModel
 {
+    protected static $fillable = [];//хранится набор атрибутов которые хранятся в БД
     protected static $tableName;
     protected static $connection;
 //одно подключение к БД
@@ -38,7 +39,7 @@ class BaseModel
         return $arr;
 
     }
-public static function findById($id){
+    public static function findById($id){
     /**
      * @var mysqli $connection
      */
@@ -50,6 +51,30 @@ public static function findById($id){
     $result = $smth->get_result();
     return $result->fetch_object(static::class);//ожидаеем только одну запись поэтому assoc //static class для всех наследников
 
-}
+    }
+
+    public function save(){
+        $connection = self::getConnection();
+        $tableName= static::getTableName();
+
+        if (isset($this->id) && !empty($this->id)){
+            //update
+        } else {
+            $fields = implode(',', static::$fillable);
+            $values = [];
+            foreach (static::$fillable as $attributeName){
+                $values[] = $this->{$attributeName}($fields) ?? null;
+            }
+            $values = "'".implode("' , '", $values)."'";
+            print_r($values);
+            $sql = "INSERT into {$tableName} ({$fields}) VALUES ({$values})";
+            $connection->query($sql);
+            if ($connection->insert_id){
+                $this->id =$connection->insert_id;
+            }
+        }
+
+
+    }
 
 }
