@@ -63,18 +63,15 @@ class BaseModel
             $fields = implode(',', static::$fillable);
             $values = [];
             foreach (static::$fillable as $attributeName){
-                $values[] = $this->{$attributeName}($fields) ?? null;
+                $values[] = $this->{$attributeName} ?? null;
             }
             $values = "'".implode("' , '", $values)."'";
-            print_r($values);
             $sql = "INSERT into {$tableName} ({$fields}) VALUES ({$values})";
             $connection->query($sql);
             if ($connection->insert_id){
-                $this->id =$connection->insert_id;
+                $this->id = $connection->insert_id;
             }
         }
 
-
     }
-
 }
