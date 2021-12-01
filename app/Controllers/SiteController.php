@@ -13,8 +13,9 @@ class SiteController
 {
     public function index(){
         $product = new Product();
-        $product->name = 'new_prod';
-        $product->description = '1000';
+        $product->id = 3;
+        $product->name = 'laptop';
+        $product->description = '156';
         $product->save();
 
         Product::findById('1');

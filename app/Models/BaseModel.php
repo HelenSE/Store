@@ -58,16 +58,28 @@ class BaseModel
         $tableName= static::getTableName();
 
         if (isset($this->id) && !empty($this->id)){
-            //update
+            $values = [];
+
+            foreach (static::$fillable as $attributeName) {
+                $values[] = $attributeName.' = '.'"'.$this->{$attributeName}.'"';
+            }
+
+            $values = implode(', ', $values);
+            $sql = "UPDATE {$tableName} SET {$values} WHERE id = {$this->id}";
+            $connection->query($sql);//update
+
         } else {
             $fields = implode(',', static::$fillable);
             $values = [];
+
             foreach (static::$fillable as $attributeName){
                 $values[] = $this->{$attributeName} ?? null;
             }
+
             $values = "'".implode("' , '", $values)."'";
             $sql = "INSERT into {$tableName} ({$fields}) VALUES ({$values})";
             $connection->query($sql);
+
             if ($connection->insert_id){
                 $this->id = $connection->insert_id;
             }
